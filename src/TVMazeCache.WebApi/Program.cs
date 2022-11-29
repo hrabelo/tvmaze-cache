@@ -1,9 +1,21 @@
+using TVMazeCache.WebApi;
+using TVMazeCache.WebApi.BackgroundServices;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Logging.AddConsole();
 
-builder.Services.AddControllers();
+var configuration = new ConfigurationBuilder()
+        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+        .AddEnvironmentVariables()
+        .Build();
 
+var settings = new Settings(configuration);
+builder.Services.AddSingleton(settings);
+builder.Services.AddSingleton(settings.StoringBackgroundServiceSettings);
+
+builder.Services.AddHostedService<StoreShowsBackgroundService>();
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
