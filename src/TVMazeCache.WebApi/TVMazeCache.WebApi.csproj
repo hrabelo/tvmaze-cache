@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="V1\Models\" />
+    <ProjectReference Include="..\TVMazeCache.ApiClient\TVMazeCache.ApiClient.csproj" />
   </ItemGroup>
 
 </Project>
