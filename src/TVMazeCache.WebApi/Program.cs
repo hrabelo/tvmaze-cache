@@ -2,6 +2,7 @@ using TVMazeCache.ApiClient.Infrastructure;
 using TVMazeCache.Persistence.MongoDB.Infrastructure;
 using TVMazeCache.WebApi;
 using TVMazeCache.WebApi.BackgroundServices;
+using TVMazeCache.Domain.UseCases;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,9 @@ builder.Services.AddTvMazeApiClient(appName, settings.TvMazeApiClientSettings);
 
 builder.Services.AddSingleton(settings.MongoDbShowsRepositorySettings);
 builder.Services.AddShowsRepository();
+
+builder.Services.AddTransient<StoreShowsWithCastUseCase>();
+builder.Services.AddTransient<RetrieveShowsWithCastUseCase>();
 
 builder.Services.AddHostedService<StoreShowsBackgroundService>();
 builder.Services.AddControllers();

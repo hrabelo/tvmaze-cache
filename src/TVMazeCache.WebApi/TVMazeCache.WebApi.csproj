@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TVMazeCache.ApiClient\TVMazeCache.ApiClient.csproj" />
     <ProjectReference Include="..\TVMazeCache.Persistence.MongoDB\TVMazeCache.Persistence.MongoDB.csproj" />
+    <ProjectReference Include="..\TVMazeCache.Domain\TVMazeCache.Domain.csproj" />
   </ItemGroup>
 
 </Project>
