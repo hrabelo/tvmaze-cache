@@ -1,4 +1,5 @@
 using TVMazeCache.ApiClient.Infrastructure;
+using TVMazeCache.Persistence.MongoDB.Infrastructure;
 using TVMazeCache.WebApi;
 using TVMazeCache.WebApi.BackgroundServices;
 
@@ -16,9 +17,11 @@ var configuration = new ConfigurationBuilder()
 var settings = new Settings(configuration);
 builder.Services.AddSingleton(settings);
 builder.Services.AddSingleton(settings.StoringBackgroundServiceSettings);
-
 builder.Services.AddSingleton(settings.TvMazeApiClientSettings);
 builder.Services.AddTvMazeApiClient(appName, settings.TvMazeApiClientSettings);
+
+builder.Services.AddSingleton(settings.MongoDbShowsRepositorySettings);
+builder.Services.AddShowsRepository();
 
 builder.Services.AddHostedService<StoreShowsBackgroundService>();
 builder.Services.AddControllers();

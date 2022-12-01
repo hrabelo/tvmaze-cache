@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TVMazeCache.ApiClient\TVMazeCache.ApiClient.csproj" />
+    <ProjectReference Include="..\TVMazeCache.Persistence.MongoDB\TVMazeCache.Persistence.MongoDB.csproj" />
   </ItemGroup>
 
 </Project>
