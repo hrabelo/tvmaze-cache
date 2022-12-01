@@ -23,6 +23,16 @@ namespace TVMazeCache.Domain.UseCases
             if (!shows.Any())
                 return IngestedBatchResult.NothingToProcess;
 
+            var enrichedShows = new List<Show>(shows.Count());
+
+            foreach(var show in shows)
+            {
+                var cast = await _tvMazeApiClient.GetCast(show.Id, cancellationToken);
+                enrichedShows.Add(show.WithCast(cast));
+            }
+
+            await _showsRepository.StoreBatch(enrichedShows, cancellationToken);
+
             return IngestedBatchResult.Success;
         }
     }
