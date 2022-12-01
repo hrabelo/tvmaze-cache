@@ -14,10 +14,10 @@ namespace TVMazeCache.Persistence.MongoDB
             _showCollection = mongoDatabase.GetCollection<ShowDto>("shows");
         }
 
-        public async Task<IEnumerable<Show>> Get(int page, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Show>> Get(int page)
         {
             var zeroBasedPage = (page - 1) > 0 ? (page - 1) : 0;
-            var showsDto = await _showCollection.Find(_ => true).ToListAsync(cancellationToken);
+            var showsDto = await _showCollection.Find(_ => true).ToListAsync();
             return showsDto.Skip(zeroBasedPage * PAGE_SIZE).Select(_ => _.ToDomain()).Take(PAGE_SIZE);
         }
 

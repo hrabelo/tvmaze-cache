@@ -16,8 +16,7 @@ namespace TVMazeCache.Domain.Ports
         /// Retrieves a collection of shows based on the index (paginated).
         /// </summary>
         /// <param name="index">The index for the collection of the show (page)</param>
-        /// <param name="cancellationToken">The cancellation token</param>
         /// <returns>A collection of shows</returns>
-        Task<IEnumerable<Show>> Get(int index, CancellationToken cancellationToken);
+        Task<IEnumerable<Show>> Get(int index);
     }
 }
