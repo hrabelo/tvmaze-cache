@@ -4,7 +4,7 @@ services:
     image: mongo:5.0.14
     container_name: 'tvmaze-mongo-container'
     environment:
-      - MONGO_INITDB_DATABASE=shows
+      - MONGO_INITDB_DATABASE=tv-maze-cache
     volumes:
       - ./mongo-volume:/data/db
     ports:
