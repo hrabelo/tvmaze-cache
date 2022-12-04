@@ -6,8 +6,13 @@
 
         public long TimeoutMilliseconds { get; set; } = 30000;
 
-        public int RetryCount { get; set; } = 3;
+        public int TooManyRequestsRetryCount { get; set; } = 3;
 
-        public int WaitIntervalSeconds { get; set; } = 10;
+        public int TooManyRequestsWaitIntervalSeconds { get; set; } = 10;
+
+        public int TransientErrorRetryCount { get; set; } = 1;
+
+        public int TransientErrorWaitIntervalSeconds { get; set; } = 1;
+
     }
 }

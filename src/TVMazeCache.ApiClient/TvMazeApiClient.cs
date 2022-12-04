@@ -22,7 +22,9 @@ namespace TVMazeCache.ApiClient
             var httpClient = _httpClientFactory();
             var response = await httpClient.GetAsync(_getShowsEndpoint(page), token);
 
-            var resultAsString = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+
+            var resultAsString = await response.Content.ReadAsStringAsync(token);
             var showsDto = JsonConvert.DeserializeObject<IEnumerable<ShowDto>>(resultAsString);
             return showsDto!.Select(_ => _.ToDomain());
         }
@@ -32,7 +34,9 @@ namespace TVMazeCache.ApiClient
             var httpClient = _httpClientFactory();
             var response = await httpClient.GetAsync(_getCastEndpoint(showId), token);
 
-            var resultAsString = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+
+            var resultAsString = await response.Content.ReadAsStringAsync(token);
             var castDto = JsonConvert.DeserializeObject<IEnumerable<CastDto>>(resultAsString);
             return castDto!.Select(_ => _.Person.ToDomain());
         }
