@@ -30,6 +30,7 @@ namespace TVMazeCache.WebApi.BackgroundServices
             totalStopwatch.Start();
 
             var page = await _indexRepository.GetLastPageNumber(stoppingToken);
+            _logger.LogInformation("Resuming scrapping from page {Page}", page);
 
             while (!stoppingToken.IsCancellationRequested)
             {
@@ -39,6 +40,8 @@ namespace TVMazeCache.WebApi.BackgroundServices
                 var result = await _useCase.Execute(page, stoppingToken);
                 executionStopwatch.Stop();
 
+                await _indexRepository.UpdateLastPageNumber(page, stoppingToken);
+
                 if (result == IngestedBatchResult.NothingToProcess)
                 {
                     totalStopwatch.Stop();
@@ -46,12 +49,8 @@ namespace TVMazeCache.WebApi.BackgroundServices
                     return;
                 }
 
-                page++;
-
-                await _indexRepository.UpdateLastPageNumber(page, stoppingToken);
-
                 _logger.LogInformation("Scrapping page {Page} took {Seconds} seconds ", page, executionStopwatch.ElapsedMilliseconds / 1000);
-
+                page++;
                 await Task.Delay(_delayInMilliseconds, stoppingToken);
             }
         }
