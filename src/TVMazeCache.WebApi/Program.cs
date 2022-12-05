@@ -17,7 +17,7 @@ var configuration = new ConfigurationBuilder()
 
 var settings = new Settings(configuration);
 builder.Services.AddSingleton(settings);
-builder.Services.AddSingleton(settings.StoringBackgroundServiceSettings);
+builder.Services.AddSingleton(settings.StoreShowsBackgroundServiceSettings);
 builder.Services.AddSingleton(settings.TvMazeApiClientSettings);
 builder.Services.AddTvMazeApiClient(appName, settings.TvMazeApiClientSettings);
 

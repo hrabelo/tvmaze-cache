@@ -7,8 +7,8 @@ namespace TVMazeCache.ApiClient
 {
     public class TvMazeApiClient : ITvMazeApiClient
     {
-        private static string _getShowsEndpoint(int page) => $"shows?page={page}";
-        private static string _getCastEndpoint(int showId) => $"shows/{showId}/cast";
+        private static string GetShowsEndpoint(int page) => $"shows?page={page}";
+        private static string GetCastEndpoint(int showId) => $"shows/{showId}/cast";
 
         private readonly Func<HttpClient> _httpClientFactory;
 
@@ -20,7 +20,7 @@ namespace TVMazeCache.ApiClient
         public async Task<IEnumerable<Show>> GetShows(int page, CancellationToken token)
         {
             var httpClient = _httpClientFactory();
-            var response = await httpClient.GetAsync(_getShowsEndpoint(page), token);
+            var response = await httpClient.GetAsync(GetShowsEndpoint(page), token);
 
             response.EnsureSuccessStatusCode();
 
@@ -32,7 +32,7 @@ namespace TVMazeCache.ApiClient
         public async Task<IEnumerable<Person>> GetCast(int showId, CancellationToken token)
         {
             var httpClient = _httpClientFactory();
-            var response = await httpClient.GetAsync(_getCastEndpoint(showId), token);
+            var response = await httpClient.GetAsync(GetCastEndpoint(showId), token);
 
             response.EnsureSuccessStatusCode();
 
