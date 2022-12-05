@@ -17,6 +17,6 @@ namespace TVMazeCache.WebApi.V1.Models
         }
 
         public static ShowDto FromDomain(Show s) =>
-            new(s.Id, s.Name, s.Cast.Select(p => PersonDto.FromDomain(p)).OrderBy(p => p.Birthday));
+            new(s.Id, s.Name, s.Cast.OrderByDescending(p => p.Birthday).Select(p => PersonDto.FromDomain(p)));
     }
 }

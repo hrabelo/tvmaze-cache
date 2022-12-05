@@ -6,9 +6,9 @@ namespace TVMazeCache.WebApi.V1.Models
     {
         public int Id { get; }
         public string Name { get; }
-        public DateTime? Birthday { get; }
+        public string Birthday { get; }
 
-        public PersonDto(int id, string name, DateTime? birthday)
+        public PersonDto(int id, string name, string birthday)
         {
             Id = id;
             Name = name;
@@ -16,6 +16,6 @@ namespace TVMazeCache.WebApi.V1.Models
         }
 
         public static PersonDto FromDomain(Person p) =>
-            new(p.Id, p.Name, p.Birthday);
+            new(p.Id, p.Name, p.Birthday?.Date.ToString("yyyy-MM-dd"));
     }
 }
