@@ -6,7 +6,7 @@ namespace TVMazeCache.WebApi
 {
     internal class Settings
     {
-        public StoringBackgroundServiceSettings StoringBackgroundServiceSettings { get; set; }
+        public StoreShowsBackgroundServiceSettings StoringBackgroundServiceSettings { get; set; }
 
         public TvMazeApiClientSettings TvMazeApiClientSettings { get; set; }
 

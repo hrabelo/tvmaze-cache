@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TVMazeCache.ApiClient.Tests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TVMazeCache.Persistence.MongoDB.Tests.Integration", "tests\TVMazeCache.WebApi.Tests.Integration\TVMazeCache.Persistence.MongoDB.Tests.Integration.csproj", "{A3D2D275-B7F7-4829-8A87-0E6905FD412C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TVMazeCache.WebApi.Tests.Unit", "tests\TVMazeCache.WebApi.Tests.Unit\TVMazeCache.WebApi.Tests.Unit.csproj", "{926F1112-5721-4978-9EED-70A4FB06F0A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{A3D2D275-B7F7-4829-8A87-0E6905FD412C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3D2D275-B7F7-4829-8A87-0E6905FD412C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3D2D275-B7F7-4829-8A87-0E6905FD412C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{926F1112-5721-4978-9EED-70A4FB06F0A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{926F1112-5721-4978-9EED-70A4FB06F0A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{926F1112-5721-4978-9EED-70A4FB06F0A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{926F1112-5721-4978-9EED-70A4FB06F0A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +73,7 @@ Global
 		{205E9870-A12F-4FDE-8B4A-38B5C1D1B95E} = {53040288-6F91-4557-B623-DFD5926C4FE9}
 		{1AA87B87-0F25-4D91-9E96-E4B5F3A5A0CB} = {53040288-6F91-4557-B623-DFD5926C4FE9}
 		{A3D2D275-B7F7-4829-8A87-0E6905FD412C} = {53040288-6F91-4557-B623-DFD5926C4FE9}
+		{926F1112-5721-4978-9EED-70A4FB06F0A0} = {53040288-6F91-4557-B623-DFD5926C4FE9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A12A49E3-CBB6-474A-B637-D867154FEA50}

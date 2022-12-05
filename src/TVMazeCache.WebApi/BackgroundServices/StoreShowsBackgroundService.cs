@@ -5,7 +5,7 @@ using TVMazeCache.Domain.UseCases;
 
 namespace TVMazeCache.WebApi.BackgroundServices
 {
-    internal class StoreShowsBackgroundService : BackgroundService
+    public class StoreShowsBackgroundService : BackgroundService
     {
         private readonly StoreShowsWithCastUseCase _useCase;
         private readonly IIndexRepository _indexRepository;
@@ -15,7 +15,7 @@ namespace TVMazeCache.WebApi.BackgroundServices
         public StoreShowsBackgroundService(
             StoreShowsWithCastUseCase useCase,
             IIndexRepository indexRepository,
-            StoringBackgroundServiceSettings settings, 
+            StoreShowsBackgroundServiceSettings settings, 
             ILogger<StoreShowsBackgroundService> logger)
         {
             _useCase = useCase;
@@ -23,6 +23,9 @@ namespace TVMazeCache.WebApi.BackgroundServices
             _delayInMilliseconds = settings.DelayInMilliseconds;
             _logger = logger;
         }
+
+        public async Task ExecuteAsync() =>
+            await ExecuteAsync(CancellationToken.None);
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {

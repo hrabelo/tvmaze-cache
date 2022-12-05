@@ -1,6 +1,6 @@
 ﻿namespace TVMazeCache.WebApi.BackgroundServices
 {
-    internal class StoringBackgroundServiceSettings
+    public class StoreShowsBackgroundServiceSettings
     {
         public int DelayInMilliseconds { get; set; } = 1000;
     }
