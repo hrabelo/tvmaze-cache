@@ -34,24 +34,41 @@ namespace TVMazeCache.WebApi.BackgroundServices
 
             while (!stoppingToken.IsCancellationRequested)
             {
-                var executionStopwatch = new Stopwatch();
-
-                executionStopwatch.Start();
-                var result = await _useCase.Execute(page, stoppingToken);
-                executionStopwatch.Stop();
-
-                await _indexRepository.UpdateLastPageNumber(page, stoppingToken);
-
-                if (result == IngestedBatchResult.NothingToProcess)
+                try
                 {
-                    totalStopwatch.Stop();
-                    _logger.LogInformation("Scrapping took {Seconds} seconds in total", totalStopwatch.ElapsedMilliseconds / 1000);
+                    var executionStopwatch = new Stopwatch();
+
+                    executionStopwatch.Start();
+                    var result = await _useCase.Execute(page, stoppingToken);
+                    executionStopwatch.Stop();
+
+                    await _indexRepository.UpdateLastPageNumber(page, stoppingToken);
+
+                    if (result == IngestedBatchResult.NothingToProcess)
+                    {
+                        totalStopwatch.Stop();
+                        _logger.LogInformation("Scrapping took {Seconds} seconds in total", totalStopwatch.ElapsedMilliseconds / 1000);
+                        return;
+                    }
+
+                    _logger.LogInformation("Scrapping page {Page} took {Seconds} seconds ", page, executionStopwatch.ElapsedMilliseconds / 1000);
+                    await Task.Delay(_delayInMilliseconds, stoppingToken);
+                }
+                catch (HttpRequestException httpEx)
+                {
+                    // If the errors get through the polly policies, then assume them as transient and ignore the page
+                    _logger.LogWarning(httpEx, "Transient failure when processing page {Page}", page);
+                }
+                catch (Exception ex)
+                {
+                    // If more generic exception, such as failing to store to Mongo, should log and abort processing
+                    _logger.LogError(ex, "Fatal error");
                     return;
                 }
-
-                _logger.LogInformation("Scrapping page {Page} took {Seconds} seconds ", page, executionStopwatch.ElapsedMilliseconds / 1000);
-                page++;
-                await Task.Delay(_delayInMilliseconds, stoppingToken);
+                finally
+                {
+                    page++;
+                }
             }
         }
     }
