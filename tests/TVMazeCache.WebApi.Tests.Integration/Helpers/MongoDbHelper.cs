@@ -7,7 +7,7 @@ using TVMazeCache.Persistence.MongoDB.Models;
 
 namespace TVMazeCache.WebApi.Tests.Integration.Helpers
 {
-    public class LocalStackHelper
+    public class MongoDbHelper
     {
         private bool _started = false;
         private readonly MongoDbTestcontainer _container;
@@ -15,10 +15,9 @@ namespace TVMazeCache.WebApi.Tests.Integration.Helpers
 
         public IMongoDatabase? MongoDatabase { get; set; }
 
-        public LocalStackHelper()
+        public MongoDbHelper()
         {
             _container = new TestcontainersBuilder<MongoDbTestcontainer>()
-                .WithName("localstack-" + Guid.NewGuid())
                 .WithImage("mongo:5.0.6")
                 .WithDatabase(_mongoDbConfig)
                 .Build();

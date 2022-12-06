@@ -8,10 +8,10 @@ namespace TVMazeCache.WebApi.Tests.Integration
 {
     public class ShowsRepositoryTests
     {
-        private static readonly LocalStackHelper LocalStackHelper = new();
+        private static readonly MongoDbHelper MongoDbHelper = new();
         public ShowsRepositoryTests()
         {
-            LocalStackHelper.StartContainerSync();
+            MongoDbHelper.StartContainerSync();
         }
 
         [Fact]
@@ -20,7 +20,7 @@ namespace TVMazeCache.WebApi.Tests.Integration
             var shows = ShowBuilder.BuildMany(10);
             await CreateSut().StoreBatch(shows, CancellationToken.None);
 
-            var retrievedShows = await LocalStackHelper.GetAll();
+            var retrievedShows = await MongoDbHelper.GetAll();
             retrievedShows.Should().HaveCountGreaterThanOrEqualTo(10);
         }
 
@@ -28,13 +28,13 @@ namespace TVMazeCache.WebApi.Tests.Integration
         public async Task GetBatch_WhenCalled_ShouldStoreInMongoDb()
         {
             var show = ShowBuilder.Build();
-            await LocalStackHelper.InsertItemToShowCollection(show);
+            await MongoDbHelper.InsertItemToShowCollection(show);
 
             var retrievedShows = await CreateSut().Get(0);
             retrievedShows.Should().Contain(_ => _.Id == show.Id);
         }
 
         public ShowsRepository CreateSut() =>
-            new(LocalStackHelper.MongoDatabase!);
+            new(MongoDbHelper.MongoDatabase!);
     }
 }
