@@ -22,6 +22,9 @@ namespace TVMazeCache.ApiClient
             var httpClient = _httpClientFactory();
             var response = await httpClient.GetAsync(GetShowsEndpoint(page), token);
 
+            if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                return Enumerable.Empty<Show>();
+
             response.EnsureSuccessStatusCode();
 
             var resultAsString = await response.Content.ReadAsStringAsync(token);

@@ -28,7 +28,7 @@ namespace TVMazeCache.ApiClient.Infrastructure
                     retryAttepmt => TimeSpan.FromSeconds(settings.TransientErrorWaitIntervalSeconds),
                     onRetry: (outcome, timespan, retryAttempt, context) =>
                     {
-                        logger.LogWarning("{ReasonPhrase} when processing path {Path}. Delaying for {Delay} ms, then making retry {Retry}.", outcome.Result.ReasonPhrase, outcome.Result?.RequestMessage?.RequestUri?.AbsolutePath, timespan.TotalMilliseconds, retryAttempt);
+                        logger.LogWarning("{ReasonPhrase} when processing path {Path}. Delaying for {Delay} ms, then making retry {Retry}.", outcome.Result?.ReasonPhrase, outcome.Result?.RequestMessage?.RequestUri?.AbsolutePath, timespan.TotalMilliseconds, retryAttempt);
                     });
         }
     }
