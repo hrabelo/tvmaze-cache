@@ -5,6 +5,7 @@ using TVMazeCache.WebApi.V1.Models;
 namespace TVMazeCache.WebApi.V1.Controllers
 {
     [Route("shows")]
+    [ApiVersion("1.0")]
     [ApiController]
     public class ShowsController : ControllerBase
     {

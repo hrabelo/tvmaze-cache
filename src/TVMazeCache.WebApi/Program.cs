@@ -3,6 +3,7 @@ using TVMazeCache.Persistence.MongoDB.Infrastructure;
 using TVMazeCache.WebApi;
 using TVMazeCache.WebApi.BackgroundServices;
 using TVMazeCache.Domain.UseCases;
+using Microsoft.AspNetCore.Mvc.Versioning;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,8 +16,21 @@ var configuration = new ConfigurationBuilder()
         .AddEnvironmentVariables()
         .Build();
 
+builder.Services.AddApiVersioning(opt =>
+{
+    opt.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
+    opt.AssumeDefaultVersionWhenUnspecified = true;
+    opt.ReportApiVersions = true;
+    opt.ApiVersionReader = new MediaTypeApiVersionReader("v");
+});
+
+builder.Services.AddVersionedApiExplorer(opt =>
+{
+    opt.GroupNameFormat = "'v'VVV";
+});
+
 var settings = new Settings(configuration);
-builder.Services.AddSingleton(settings);
+
 builder.Services.AddSingleton(settings.StoreShowsBackgroundServiceSettings);
 builder.Services.AddSingleton(settings.TvMazeApiClientSettings);
 builder.Services.AddTvMazeApiClient(appName, settings.TvMazeApiClientSettings);
