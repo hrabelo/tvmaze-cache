@@ -27,8 +27,8 @@ namespace TVMazeCache.ApiClient.Infrastructure
                                client.BaseAddress = new Uri(settings.BaseUrl!);
                                client.Timeout = TimeSpan.FromMilliseconds(settings.TimeoutMilliseconds);
                            })
-                           .AddPolicyHandler((services, request) => Policies.GetRetryPolicyForRateLimit(settings, services.GetRequiredService<ILogger<TvMazeApiClient>>()))
-                           .AddPolicyHandler((services, request) => Policies.GetRetryPolicyForTransientErrors(settings, services.GetRequiredService<ILogger<TvMazeApiClient>>()));
+                           .AddPolicyHandler((services, _) => Policies.GetRetryPolicyForRateLimit(settings, services.GetRequiredService<ILogger<TvMazeApiClient>>()))
+                           .AddPolicyHandler((services, _) => Policies.GetRetryPolicyForTransientErrors(settings, services.GetRequiredService<ILogger<TvMazeApiClient>>()));
         }
 
         public static void RegisterClients(
