@@ -77,4 +77,4 @@ Example responses
 - Because of the rate limit of TVMazeApi, parallelization wouldn't offer much. Therefore, the scrapping is serial;
 - MongoDB as a storage for simplicity. NoSQL looks like a good option for this case, since it's basically storing the JSON response of API calls. No need to worry about data modelling and table creation.
 - If the application stops midway through the scrapping, then the next time it runs it'll resume from the last processed page. (Also stored in Mongo).
-- The Api rate limit mentioned above and possible transient errors when scrapping TVMazeApi are gracefully handled by [Polly](https://github.com/dotnet/aspnetcore/tree/bb01bbf4433e27289b99001b7de6a582879d1835).
+- The Api rate limit mentioned above and possible transient errors when scrapping TVMazeApi are gracefully handled by [Polly](https://github.com/App-vNext/Polly.Extensions.Http/blob/master/README.md).
