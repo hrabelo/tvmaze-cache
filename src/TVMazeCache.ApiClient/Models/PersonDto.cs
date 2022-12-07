@@ -4,9 +4,9 @@ namespace TVMazeCache.ApiClient.Models
 {
     public class PersonDto
     {
-        public readonly int Id;
-        public readonly string Name;
-        public readonly DateTime? Birthday;
+        public int Id { get; }
+        public string Name { get; }
+        public DateTime? Birthday { get; }
 
         public PersonDto(int id, string name, DateTime? birthday)
         {

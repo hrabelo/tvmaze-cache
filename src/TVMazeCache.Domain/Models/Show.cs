@@ -2,9 +2,9 @@
 {
     public class Show
     {
-        public readonly int Id;
-        public readonly string Name;
-        public readonly IEnumerable<Person>? Cast;
+        public int Id { get; }
+        public string Name { get; }
+        public IEnumerable<Person>? Cast { get; }
 
         public Show(int id, string name, IEnumerable<Person>? cast = null)
         {

@@ -2,7 +2,7 @@
 {
     public class CastDto
     {
-        public readonly PersonDto Person;
+        public PersonDto Person { get; }
         
         public CastDto(PersonDto person)
         {

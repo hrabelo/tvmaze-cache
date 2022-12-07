@@ -2,9 +2,9 @@
 {
     public class Person
     {
-        public readonly int Id;
-        public readonly string Name;
-        public readonly DateTime? Birthday;
+        public int Id { get; }
+        public string Name { get; }
+        public DateTime? Birthday { get; }
 
         public Person(int id, string name, DateTime? birthday)
         {

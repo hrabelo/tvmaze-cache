@@ -4,8 +4,8 @@ namespace TVMazeCache.ApiClient.Models
 {
     public class ShowDto
     {
-        public readonly int Id;
-        public readonly string Name;
+        public int Id { get; }
+        public string Name { get; }
 
         public ShowDto(int id, string name)
         {
