@@ -9,7 +9,7 @@ namespace TVMazeCache.Domain.Tests.Unit.Builders
         
         internal static IEnumerable<Person> BuildMany(int number)
         {
-            for (var i =0; i < number; i++)
+            for (var i = 0; i < number; i++)
             {
                 yield return Build();
             }

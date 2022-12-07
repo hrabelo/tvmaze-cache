@@ -23,10 +23,10 @@ namespace TVMazeCache.WebApi.Tests.Integration.Helpers
                 .Build();
         }
 
-        public void StartContainerSync() =>
+        internal void StartContainerSync() =>
             Task.Run(StartContainerAsync).Wait();
         
-        public async Task StartContainerAsync()
+        internal async Task StartContainerAsync()
         {
             if (!_started)
             {
@@ -37,13 +37,13 @@ namespace TVMazeCache.WebApi.Tests.Integration.Helpers
             MongoDatabase = client.GetDatabase(_mongoDbConfig.Database);
         }
 
-        public async Task InsertItemToShowCollection(Show show)
+        internal async Task InsertItemToShowCollection(Show show)
         {
             var showCollection = MongoDatabase!.GetCollection<ShowDto>("shows");
             await showCollection!.InsertOneAsync(ShowDto.FromDomain(show));
         }
 
-        public async Task<IEnumerable<Show>> GetAll()
+        internal async Task<IEnumerable<Show>> GetAll()
         {
             var showCollection = MongoDatabase!.GetCollection<ShowDto>("shows");
             var dtos = await showCollection.Find(_ => true).ToListAsync();

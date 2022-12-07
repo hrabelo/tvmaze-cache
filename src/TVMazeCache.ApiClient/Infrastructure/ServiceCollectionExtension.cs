@@ -15,7 +15,7 @@ namespace TVMazeCache.ApiClient.Infrastructure
             RegisterClients(services, clientName);
         }
 
-        public static void AddHttpClient(
+        private static void AddHttpClient(
             this IServiceCollection services,
             string clientName,
             TvMazeApiClientSettings settings)
@@ -31,7 +31,7 @@ namespace TVMazeCache.ApiClient.Infrastructure
                            .AddPolicyHandler((sp, _) => Policies.GetRetryPolicyForTransientErrors(settings, sp.GetRequiredService<ILogger<TvMazeApiClient>>()));
         }
 
-        public static void RegisterClients(
+        private static void RegisterClients(
             this IServiceCollection services,
             string clientName)
         {
