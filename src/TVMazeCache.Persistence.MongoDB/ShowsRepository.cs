@@ -23,7 +23,7 @@ namespace TVMazeCache.Persistence.MongoDB
 
         public async Task StoreBatch(IEnumerable<Show> shows, CancellationToken cancellationToken)
         {
-            var showsDto = shows.Select(_ => ShowDto.FromDomain(_));
+            var showsDto = shows.Select(ShowDto.FromDomain);
             await _showCollection.InsertManyAsync(showsDto, null, cancellationToken);
         }
     }

@@ -25,7 +25,7 @@ namespace TVMazeCache.Persistence.MongoDB.Models
             {
                 Id = s.Id,
                 Name = s.Name,
-                Cast = s.Cast!.Select(_ => PersonDto.FromDomain(_)).ToArray()
+                Cast = s.Cast!.Select(PersonDto.FromDomain).ToArray()
             };
     }
 }
